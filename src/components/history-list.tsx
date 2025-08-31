@@ -1,14 +1,16 @@
+
 'use client';
 
 import { useState } from 'react';
 import { useHistory } from '@/hooks/use-history';
 import { useLanguage } from '@/components/language-provider';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import type { HistoryItem } from '@/lib/types';
 import { ConversionResults } from '@/components/conversion-results';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Link2 } from 'lucide-react';
 
 export function HistoryList() {
   const { history, isLoaded } = useHistory();
@@ -44,13 +46,21 @@ export function HistoryList() {
     );
   }
 
+  const getDisplayName = (item: HistoryItem) => {
+    return item.links.find(link => link.displayName)?.displayName || 'Unknown Title';
+  }
+
   return (
     <>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {history.map(item => (
-          <Card key={item.id}>
-            <CardHeader>
-              <CardTitle className="text-base font-medium break-all">{item.source_url}</CardTitle>
+          <Card key={item.id} className="flex flex-col">
+            <CardHeader className="flex-grow">
+              <CardTitle className="text-lg font-semibold">{getDisplayName(item)}</CardTitle>
+              <CardDescription className="flex items-center gap-2 pt-1">
+                  <Link2 className="h-4 w-4" />
+                  <span className="truncate">{item.source_url}</span>
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
@@ -81,3 +91,4 @@ export function HistoryList() {
     </>
   );
 }
+
