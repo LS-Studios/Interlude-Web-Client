@@ -23,8 +23,7 @@ export async function getProviders(): Promise<Provider[]> {
     }
     const providers: Provider[] = await response.json();
     return providers.map(provider => ({
-      ...provider,
-      logo: `${API_BASE_URL}${provider.logo}`
+      ...provider
     }));
   } catch (error) {
     console.error('Error fetching providers:', error);

@@ -2,7 +2,6 @@ export interface Provider {
   id: string;
   name: string;
   logo: string;
-  url_template: string;
 }
 
 export interface ConvertedLink {
