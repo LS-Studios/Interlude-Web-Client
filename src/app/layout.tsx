@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -5,6 +6,8 @@ import { LanguageProvider } from '@/components/language-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/header';
 import { BottomNavBar } from '@/components/bottom-nav-bar';
+import { Footer } from '@/components/footer';
+import { CookieBanner } from '@/components/cookie-banner';
 
 export const metadata: Metadata = {
   title: 'Interlude',
@@ -28,14 +31,16 @@ export default function RootLayout({
           <LanguageProvider>
             <div className="relative flex min-h-screen flex-col">
               <Header />
-              <main className="flex flex-1 justify-center py-8 pb-24 md:pb-8">
+              <main className="flex flex-1 justify-center py-8 pb-32 md:pb-8">
                 <div className="container px-4">
                     {children}
                 </div>
               </main>
+              <Footer />
               <BottomNavBar />
             </div>
             <Toaster />
+            <CookieBanner />
           </LanguageProvider>
         </ThemeProvider>
       </body>

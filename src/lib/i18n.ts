@@ -1,3 +1,4 @@
+
 export const translations = {
   en: {
     'app.name': 'Interlude',
@@ -33,6 +34,13 @@ export const translations = {
     'error.invalid_url': 'Please enter a valid URL.',
     'dialog.cancel': 'Cancel',
     'dialog.continue': 'Continue',
+    'footer.rights_reserved': 'All rights reserved.',
+    'footer.imprint': 'Imprint',
+    'footer.privacy': 'Privacy Policy',
+    'cookie_banner.text_start': 'We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies. Learn more in our',
+    'cookie_banner.privacy_policy': 'privacy policy',
+    'cookie_banner.text_end': '.',
+    'cookie_banner.accept': 'Got it!',
   },
   de: {
     'app.name': 'Interlude',
@@ -68,6 +76,13 @@ export const translations = {
     'error.invalid_url': 'Bitte gib eine gültige URL ein.',
     'dialog.cancel': 'Abbrechen',
     'dialog.continue': 'Fortfahren',
+    'footer.rights_reserved': 'Alle Rechte vorbehalten.',
+    'footer.imprint': 'Impressum',
+    'footer.privacy': 'Datenschutzerklärung',
+    'cookie_banner.text_start': 'Wir verwenden Cookies, um Ihre Erfahrung zu verbessern. Durch den weiteren Besuch dieser Website stimmen Sie der Verwendung von Cookies zu. Erfahren Sie mehr in unserer',
+    'cookie_banner.privacy_policy': 'Datenschutzerklärung',
+    'cookie_banner.text_end': '.',
+    'cookie_banner.accept': 'Verstanden!',
   },
 };
 
