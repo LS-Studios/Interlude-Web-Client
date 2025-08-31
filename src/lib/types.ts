@@ -1,7 +1,8 @@
 export interface Provider {
   id: string;
   name: string;
-  logo: string;
+  logoUrl: string;
+  iconUrl: string;
   url: string;
 }
 

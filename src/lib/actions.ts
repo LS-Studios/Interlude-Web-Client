@@ -32,15 +32,14 @@ export async function getProviders(): Promise<Provider[]> {
   }
 }
 
-export async function convertLink(url: string): Promise<ConversionResult> {
+export async function convertLink(url: string): Promise<ConversionResult | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/convert?url=${encodeURIComponent(url)}`, { headers: getHeaders() });
+    const response = await fetch(`${API_BASE_URL}/convert?link=${encodeURIComponent(url)}`, { headers: getHeaders() });
     
     if (!response.ok) {
         const errorText = await response.text();
         let errorMessage = errorText;
         try {
-            // Attempt to parse as JSON to get a more structured error message
             const errorJson = JSON.parse(errorText);
             errorMessage = errorJson.message || errorText;
         } catch (e) {
@@ -51,7 +50,18 @@ export async function convertLink(url: string): Promise<ConversionResult> {
 
     const result: ConversionResult = await response.json();
     
+    // If there are no links, return early.
+    if (!result || !result.links || result.links.length === 0) {
+      return result;
+    }
+    
     const providers = await getProviders();
+    // Ensure providers is an array before mapping
+    if (!Array.isArray(providers)) {
+        console.error("getProviders did not return an array.");
+        return { ...result, links: result.links.map(l => ({...l, provider_logo: undefined})) };
+    }
+
     const providersMap = new Map(providers.map(p => [p.id, p]));
 
     const linksWithLogos = result.links.map(link => {
