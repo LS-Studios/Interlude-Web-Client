@@ -35,16 +35,20 @@ export async function getProviders(): Promise<Provider[]> {
 export async function convertLink(url: string): Promise<ConversionResult> {
   try {
     const response = await fetch(`${API_BASE_URL}/convert?url=${encodeURIComponent(url)}`, { headers: getHeaders() });
+    
     if (!response.ok) {
+        const errorText = await response.text();
+        let errorMessage = errorText;
         try {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Failed to convert link');
-        } catch (jsonError) {
-            // If the error response is not JSON, use the text body
-            const textError = await response.text();
-            throw new Error(textError || 'Failed to convert link');
+            // Attempt to parse as JSON to get a more structured error message
+            const errorJson = JSON.parse(errorText);
+            errorMessage = errorJson.message || errorText;
+        } catch (e) {
+            // Not a JSON response, use the text as is.
         }
+        throw new Error(errorMessage || 'Failed to convert link');
     }
+
     const result: ConversionResult = await response.json();
     
     const providers = await getProviders();
