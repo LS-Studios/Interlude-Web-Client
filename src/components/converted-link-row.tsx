@@ -1,7 +1,8 @@
+
 'use client';
 
 import Image from 'next/image';
-import { ExternalLink, Copy } from 'lucide-react';
+import { Share } from 'lucide-react';
 import { useLongPress } from '@/hooks/use-long-press';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,28 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
       title: t('results.copied'),
     });
   };
+
+  const handleShare = async (event: React.MouseEvent) => {
+    event.stopPropagation(); // prevent the row's click handler from firing
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: link.displayName,
+          text: `Listen to ${link.displayName} on ${link.provider.name}`,
+          url: link.url,
+        });
+      } catch (error) {
+        // User cancelled the share dialog, or an error occurred.
+        // We can silently ignore this, as it's usually user action.
+        console.info('Share action was cancelled or failed', error);
+      }
+    } else {
+      // Fallback for browsers that don't support the Web Share API
+      handleCopy();
+    }
+  };
+
 
   const handleClick = () => {
     if (link.url) {
@@ -69,11 +92,8 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
             </div>
             {hasLink && (
               <>
-                <Button variant="ghost" size="icon" className="ml-4 h-8 w-8 text-muted-foreground" aria-label="Open link">
-                  <ExternalLink className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="icon" onClick={handleCopy} className="h-8 w-8 text-muted-foreground" aria-label="Copy link">
-                  <Copy className="h-4 w-4" />
+                <Button variant="ghost" size="icon" className="ml-4 h-8 w-8 text-muted-foreground" aria-label="Share link" onClick={handleShare}>
+                  <Share className="h-4 w-4" />
                 </Button>
               </>
             )}
