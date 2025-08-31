@@ -44,7 +44,6 @@ export function LinkConverter() {
     setResult(null);
     try {
       const conversionResult = await convertLink(data.url);
-      console.log(conversionResult)
       if (conversionResult && conversionResult.links && conversionResult.links.length > 0) {
         const historyItem = {
             ...conversionResult,
@@ -104,7 +103,7 @@ export function LinkConverter() {
       </Form>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-lg md:max-w-2xl">
+        <DialogContent className="max-w-lg w-[calc(100vw-2rem)] md:max-w-2xl">
           <DialogHeader>
             <DialogTitle>{t('results.title')}</DialogTitle>
           </DialogHeader>
