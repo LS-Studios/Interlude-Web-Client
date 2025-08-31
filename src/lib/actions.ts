@@ -40,6 +40,11 @@ export async function getProviders(): Promise<Provider[]> {
       JSON.stringify(providers, null, 2)
     );
 
+    if (!Array.isArray(providers)) {
+      console.log('[getProviders] Response is not an array, returning empty.');
+      return [];
+    }
+    
     const result = providers.map((provider) => ({
       ...provider,
       url: provider.url || '#',
