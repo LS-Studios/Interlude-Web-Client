@@ -1,14 +1,26 @@
+
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { getProviders } from '@/lib/actions';
 import { Card, CardContent } from '@/components/ui/card';
-import { translations } from '@/lib/i18n';
+import { useLanguage } from '@/components/language-provider';
+import type { Provider } from '@/lib/types';
 
-export async function ProvidersGrid() {
-  const providers = await getProviders();
+export function ProvidersGrid() {
+  const [providers, setProviders] = useState<Provider[]>([]);
+  const { t } = useLanguage();
 
-  // This component will be rendered on the server, so we can't use hooks.
-  // We'll default to English for the server-rendered title. A full i18n solution would handle this differently.
-  const title = translations.en['home.supported_providers'];
+  useEffect(() => {
+    async function fetchProviders() {
+      const fetchedProviders = await getProviders();
+      setProviders(fetchedProviders);
+    }
+    fetchProviders();
+  }, []);
+
+  const title = t('home.supported_providers');
 
   if (!Array.isArray(providers) || providers.length === 0) {
     return null;

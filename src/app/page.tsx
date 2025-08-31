@@ -1,30 +1,32 @@
+
+'use client';
+
 import { Suspense } from 'react';
 import Image from 'next/image';
 import { LinkConverter } from '@/components/link-converter';
 import { ProvidersGrid } from '@/components/providers-grid';
 import { Skeleton } from '@/components/ui/skeleton';
-import { translations } from '@/lib/i18n';
+import { useLanguage } from '@/components/language-provider';
 
 export default function Home() {
-  const title = translations.en['home.title'];
-  const description = translations.en['home.description'];
+  const { t } = useLanguage();
 
   return (
     <div className="flex flex-col items-center justify-center gap-8">
       <div className="text-center mt-8 sm:mt-16 flex flex-col items-center gap-6">
         <Image 
-          src="/logo.png" 
+          src="/logo.svg" 
           alt="Interlude Logo" 
-          width={64} 
-          height={64}
+          width={80} 
+          height={80}
           priority
           className="rounded-lg"
         />
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-          {title}
+          {t('home.title')}
         </h1>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-          {description}
+          {t('home.description')}
         </p>
       </div>
       
