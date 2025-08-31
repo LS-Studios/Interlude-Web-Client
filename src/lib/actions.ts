@@ -63,36 +63,34 @@ export async function convertLink(
 ): Promise<ConversionResult | null> {
   console.log(`--- DEBUG: convertLink (url: ${url}) ---`);
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/convert?link=${encodeURIComponent(url)}`,
-      { headers: getHeaders() }
-    );
-    console.log(`[convertLink] Response Status: ${response.status}`);
+    const response = await fetch(`${API_BASE_URL}/convert`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({ url }),
+      cache: 'no-store',
+    });
 
     const responseBody = await response.text();
+    console.log(`[convertLink] Response Status: ${response.status}`);
     console.log(`[convertLink] Response Body: ${responseBody}`);
 
     if (!response.ok) {
-      let errorMessage = responseBody;
-      try {
-        const errorJson = JSON.parse(responseBody);
-        errorMessage = errorJson.message || responseBody;
-      } catch (e) {
-        // Not a JSON response, use the text as is.
-      }
-      throw new Error(errorMessage || 'Failed to convert link');
+      throw new Error(
+        `API Error: ${response.status} - ${responseBody || 'No error message'}`
+      );
     }
-
+    
     const result: ConversionResult = JSON.parse(responseBody);
-    console.log(
-      '[convertLink] Parsed Result:',
-      JSON.stringify(result, null, 2)
-    );
+    console.log('[convertLink] Parsed Result:', JSON.stringify(result, null, 2));
+
     console.log('--- END DEBUG: convertLink ---');
     return result;
+
   } catch (error) {
     console.error('[convertLink] Catched Error:', error);
-    console.log('--- END DEBUG: convertLink (with error) ---');
-    throw error;
+    if (error instanceof Error) {
+        throw error;
+    }
+    throw new Error('An unknown error occurred during link conversion.');
   }
 }

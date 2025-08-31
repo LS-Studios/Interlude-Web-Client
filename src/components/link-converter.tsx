@@ -44,6 +44,7 @@ export function LinkConverter() {
     setResult(null);
     try {
       const conversionResult = await convertLink(data.url);
+      console.log(conversionResult)
       if (conversionResult && conversionResult.links && conversionResult.links.length > 0) {
         const historyItem = {
             ...conversionResult,
