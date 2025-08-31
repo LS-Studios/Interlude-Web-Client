@@ -9,7 +9,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center gap-8">
       <div className="text-center mt-8 sm:mt-16 flex flex-col items-center gap-6">
         <Image 
-          src="/logo.svg" 
+          src="/logo.png" 
           alt="Interlude Logo" 
           width={64} 
           height={64}

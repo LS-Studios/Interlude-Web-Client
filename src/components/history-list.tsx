@@ -19,20 +19,9 @@ export function HistoryList() {
 
   if (!isLoaded) {
     return (
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="space-y-4">
         {[...Array(3)].map((_, i) => (
-          <Card key={i}>
-            <CardHeader>
-              <Skeleton className="h-5 w-3/4" />
-              <Skeleton className="h-4 w-1/2" />
-            </CardHeader>
-            <CardContent>
-              <Skeleton className="h-4 w-full" />
-            </CardContent>
-            <CardFooter>
-              <Skeleton className="h-10 w-28" />
-            </CardFooter>
-          </Card>
+          <Skeleton key={i} className="h-24 w-full" />
         ))}
       </div>
     );
@@ -52,9 +41,9 @@ export function HistoryList() {
 
   return (
     <>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col gap-4">
         {history.map(item => (
-          <Card key={item.id} className="flex flex-col">
+          <Card key={item.id} className="flex flex-col sm:flex-row sm:items-center">
             <CardHeader className="flex-grow">
               <CardTitle className="text-lg font-semibold">{getDisplayName(item)}</CardTitle>
               <CardDescription className="flex items-center gap-2 pt-1">
@@ -62,17 +51,16 @@ export function HistoryList() {
                   <span className="truncate">{item.source_url}</span>
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                {t('history.converted_at')}{' '}
+            <CardContent className="pt-0 sm:pt-6 sm:pr-0">
+              <p className="text-sm text-muted-foreground whitespace-nowrap">
                 {new Date(item.timestamp).toLocaleString(language, {
                   dateStyle: 'medium',
                   timeStyle: 'short',
                 })}
               </p>
             </CardContent>
-            <CardFooter>
-              <Button onClick={() => setSelectedItem(item)}>
+            <CardFooter className="pt-0 sm:pt-6">
+              <Button onClick={() => setSelectedItem(item)} className="w-full sm:w-auto">
                 {t('history.view_results')}
               </Button>
             </CardFooter>
@@ -91,4 +79,3 @@ export function HistoryList() {
     </>
   );
 }
-
