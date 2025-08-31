@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -19,26 +20,26 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur-sm hidden md:block">
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-        <div className="flex gap-6 md:gap-10">
-           <Link href="/" className="flex items-center space-x-2 px-4">
+      <div className="container flex h-16 items-center">
+        <div className="flex flex-1 items-center justify-between">
+           <Link href="/" className="flex items-center space-x-2">
              <span className="font-bold text-lg text-accent">Interlude</span>
            </Link>
+          <nav className="flex items-center space-x-1">
+            {navItems.map(item => (
+              <Button
+                key={item.href}
+                variant={pathname === item.href ? 'secondary' : 'ghost'}
+                asChild
+              >
+                <Link href={item.href}>
+                  <item.icon className="mr-2 h-4 w-4" />
+                  {item.label}
+                </Link>
+              </Button>
+            ))}
+          </nav>
         </div>
-        <nav className="hidden md:flex flex-1 items-center justify-end space-x-1">
-          {navItems.map(item => (
-            <Button
-              key={item.href}
-              variant={pathname === item.href ? 'secondary' : 'ghost'}
-              asChild
-            >
-              <Link href={item.href}>
-                <item.icon className="mr-2 h-4 w-4" />
-                {item.label}
-              </Link>
-            </Button>
-          ))}
-        </nav>
       </div>
     </header>
   );
