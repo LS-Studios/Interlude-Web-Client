@@ -44,10 +44,15 @@ export function LinkConverter() {
     setResult(null);
     try {
       const conversionResult = await convertLink(data.url);
-      if (conversionResult && conversionResult.links.length > 0) {
-        setResult(conversionResult);
+      if (conversionResult && conversionResult.links && conversionResult.links.length > 0) {
+        const historyItem = {
+            ...conversionResult,
+            id: uuidv4(),
+            timestamp: new Date().toISOString(),
+        };
+        setResult(historyItem);
         setIsDialogOpen(true);
-        addToHistory({ ...conversionResult, id: uuidv4(), timestamp: new Date().toISOString() });
+        addToHistory(historyItem);
       } else {
         toast({
           variant: 'destructive',
