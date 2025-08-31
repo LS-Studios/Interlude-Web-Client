@@ -20,7 +20,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur-sm hidden md:block">
-      <div className="container flex h-16 items-center">
+      <div className="flex h-16 items-center px-4 container">
         <div className="flex flex-1 items-center justify-between">
            <Link href="/" className="flex items-center space-x-2">
              <span className="font-bold text-lg text-accent">Interlude</span>
