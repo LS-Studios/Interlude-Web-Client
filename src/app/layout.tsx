@@ -12,6 +12,7 @@ import { CookieBanner } from '@/components/cookie-banner';
 export const metadata: Metadata = {
   title: 'Interlude',
   description: 'Converts user-inputted links using the interlude.api.leshift.de/convert API.',
+  icons: null,
 };
 
 export default function RootLayout({
