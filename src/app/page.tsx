@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import Image from 'next/image';
 import { LinkConverter } from '@/components/link-converter';
 import { ProvidersGrid } from '@/components/providers-grid';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -6,7 +7,14 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center gap-8">
-      <div className="text-center mt-8 sm:mt-16">
+      <div className="text-center mt-8 sm:mt-16 flex flex-col items-center gap-6">
+        <Image 
+          src="/logo.svg" 
+          alt="Interlude Logo" 
+          width={64} 
+          height={64}
+          priority
+        />
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
           Convert Your Music Links
         </h1>
