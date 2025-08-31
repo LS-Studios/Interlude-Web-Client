@@ -23,7 +23,7 @@ export async function ProvidersGrid() {
             <Card className="flex flex-col items-center justify-center p-4 text-center aspect-square transition-all hover:bg-muted">
               <CardContent className="p-0 flex-grow flex items-center justify-center">
                 <Image
-                  src={provider.logo}
+                  src={provider.logoUrl}
                   alt={`${provider.name} logo`}
                   width={128}
                   height={128}

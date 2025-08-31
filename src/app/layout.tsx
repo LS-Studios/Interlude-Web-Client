@@ -27,8 +27,10 @@ export default function RootLayout({
           <LanguageProvider>
             <div className="relative flex min-h-screen flex-col">
               <Header />
-              <main className="flex-1 container py-8">
-                {children}
+              <main className="flex flex-1 justify-center py-8">
+                <div className="container">
+                    {children}
+                </div>
               </main>
             </div>
             <Toaster />
