@@ -104,7 +104,7 @@ export function LinkConverter() {
       </Form>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-md md:max-w-lg">
+        <DialogContent className="max-w-lg md:max-w-2xl">
           <DialogHeader>
             <DialogTitle>{t('results.title')}</DialogTitle>
           </DialogHeader>

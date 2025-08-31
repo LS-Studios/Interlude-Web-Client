@@ -40,7 +40,7 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
         <TooltipTrigger asChild>
           <div
             {...(hasLink ? longPressEvents : {})}
-            className={`flex items-center p-3 -m-3 rounded-lg ${hasLink ? 'hover:bg-muted cursor-pointer' : 'opacity-50'} transition-colors`}
+            className={`flex items-center p-3 rounded-lg ${hasLink ? 'hover:bg-muted cursor-pointer' : 'opacity-50'} transition-colors`}
             role={hasLink ? "button" : "presentation"}
             tabIndex={hasLink ? 0 : -1}
             onKeyDown={(e) => {
