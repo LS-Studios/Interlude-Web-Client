@@ -6,7 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/header';
 
 export const metadata: Metadata = {
-  title: 'Interlude Link Converter',
+  title: 'Interlude',
   description: 'Converts user-inputted links using the interlude.api.leshift.de/convert API.',
 };
 

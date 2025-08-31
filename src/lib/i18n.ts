@@ -1,6 +1,6 @@
 export const translations = {
   en: {
-    'app.name': 'Interlude Link Converter',
+    'app.name': 'Interlude',
     'nav.home': 'Home',
     'nav.history': 'History',
     'nav.settings': 'Settings',
@@ -35,7 +35,7 @@ export const translations = {
     'error.invalid_url': 'Please enter a valid URL.',
   },
   de: {
-    'app.name': 'Interlude Link Konverter',
+    'app.name': 'Interlude',
     'nav.home': 'Startseite',
     'nav.history': 'Verlauf',
     'nav.settings': 'Einstellungen',
