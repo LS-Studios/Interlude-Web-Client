@@ -10,7 +10,7 @@ export async function ProvidersGrid() {
   // We'll default to English for the server-rendered title. A full i18n solution would handle this differently.
   const title = translations.en['home.supported_providers'];
 
-  if (providers.length === 0) {
+  if (!Array.isArray(providers) || providers.length === 0) {
     return null;
   }
 
@@ -19,7 +19,7 @@ export async function ProvidersGrid() {
       <h2 className="text-2xl font-bold tracking-tight mb-6 text-center">{title}</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {providers.map(provider => (
-          <a key={provider.id} href={provider.url} target="_blank" rel="noopener noreferrer">
+          <a key={provider.name} href={provider.url} target="_blank" rel="noopener noreferrer">
             <Card className="flex flex-col items-center justify-center p-4 text-center aspect-square transition-all hover:bg-muted">
               <CardContent className="p-0 flex-grow flex items-center justify-center">
                 <Image

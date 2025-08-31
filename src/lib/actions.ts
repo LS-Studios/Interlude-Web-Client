@@ -1,6 +1,6 @@
 'use server';
 
-import type { ConversionResult, Provider } from '@/lib/types';
+import type { ConversionResult, Provider, HistoryItem } from '@/lib/types';
 
 const API_BASE_URL = 'https://interlude.api.leshift.de';
 
@@ -50,29 +50,7 @@ export async function convertLink(url: string): Promise<ConversionResult | null>
 
     const result: ConversionResult = await response.json();
     
-    // If there are no links, return early.
-    if (!result || !result.links || result.links.length === 0) {
-      return result;
-    }
-    
-    const providers = await getProviders();
-    // Ensure providers is an array before mapping
-    if (!Array.isArray(providers)) {
-        console.error("getProviders did not return an array.");
-        return { ...result, links: result.links.map(l => ({...l, provider_logo: undefined})) };
-    }
-
-    const providersMap = new Map(providers.map(p => [p.id, p]));
-
-    const linksWithLogos = result.links.map(link => {
-        const provider = providersMap.get(link.provider_id);
-        return {
-            ...link,
-            provider_logo: provider?.logo
-        }
-    })
-
-    return { ...result, links: linksWithLogos };
+    return result;
   } catch (error) {
     console.error('Error converting link:', error);
     throw error;

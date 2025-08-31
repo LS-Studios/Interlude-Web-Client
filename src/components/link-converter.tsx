@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -46,7 +47,7 @@ export function LinkConverter() {
       if (conversionResult && conversionResult.links.length > 0) {
         setResult(conversionResult);
         setIsDialogOpen(true);
-        addToHistory({ ...conversionResult, timestamp: new Date().toISOString() });
+        addToHistory({ ...conversionResult, id: uuidv4(), timestamp: new Date().toISOString() });
       } else {
         toast({
           variant: 'destructive',
@@ -65,7 +66,6 @@ export function LinkConverter() {
     }
   };
   
-  // Use a custom error message for zod validation failures
   const urlError = form.formState.errors.url;
   const customErrorMessage = urlError ? t('error.invalid_url') : '';
 

@@ -31,7 +31,7 @@ export function ConversionResults({ result }: ConversionResultsProps) {
       <ScrollArea className="max-h-[50vh] pr-4">
         <div className="flex flex-col gap-1">
           {result.links.map(link => (
-            <ConvertedLinkRow key={link.id} link={link} />
+            <ConvertedLinkRow key={link.provider.name} link={link} />
           ))}
         </div>
       </ScrollArea>

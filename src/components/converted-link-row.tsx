@@ -44,10 +44,10 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
             }}
           >
             <div className="flex items-center gap-4 flex-1">
-              {link.provider_logo && (
+              {link.provider.logoUrl && (
                 <Image
-                  src={link.provider_logo}
-                  alt={`${link.provider_name} logo`}
+                  src={link.provider.logoUrl}
+                  alt={`${link.provider.name} logo`}
                   width={32}
                   height={32}
                   className="h-8 w-8 object-contain"
@@ -55,7 +55,7 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
                 />
               )}
               <div className="flex-1">
-                <p className="font-semibold">{link.provider_name}</p>
+                <p className="font-semibold">{link.provider.name}</p>
               </div>
             </div>
             <Button variant="ghost" size="icon" className="ml-4 h-8 w-8 text-muted-foreground" aria-label="Open link">
