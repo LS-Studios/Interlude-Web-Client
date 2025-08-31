@@ -4,9 +4,19 @@ import type { ConversionResult, Provider } from '@/lib/types';
 
 const API_BASE_URL = 'https://interlude.api.leshift.de';
 
+const getHeaders = () => {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  if (process.env.INTERLUDE_API_TOKEN) {
+    headers['Authorization'] = `Bearer ${process.env.INTERLUDE_API_TOKEN}`;
+  }
+  return headers;
+}
+
 export async function getProviders(): Promise<Provider[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/providers`);
+    const response = await fetch(`${API_BASE_URL}/providers`, { headers: getHeaders() });
     if (!response.ok) {
       throw new Error('Failed to fetch providers');
     }
@@ -23,7 +33,7 @@ export async function getProviders(): Promise<Provider[]> {
 
 export async function convertLink(url: string): Promise<ConversionResult> {
   try {
-    const response = await fetch(`${API_BASE_URL}/convert?url=${encodeURIComponent(url)}`);
+    const response = await fetch(`${API_BASE_URL}/convert?url=${encodeURIComponent(url)}`, { headers: getHeaders() });
     if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to convert link');
