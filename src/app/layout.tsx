@@ -29,7 +29,7 @@ export default function RootLayout({
             <div className="relative flex min-h-screen flex-col">
               <Header />
               <main className="flex flex-1 justify-center py-8 pb-24 md:pb-8">
-                <div className="container">
+                <div className="container px-4">
                     {children}
                 </div>
               </main>
