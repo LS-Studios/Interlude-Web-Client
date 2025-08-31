@@ -25,26 +25,30 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
   };
 
   const handleClick = () => {
-    window.open(link.url, '_blank', 'noopener,noreferrer');
+    if (link.url) {
+      window.open(link.url, '_blank', 'noopener,noreferrer');
+    }
   };
 
   const longPressEvents = useLongPress(handleCopy, handleClick);
+  
+  const hasLink = !!link.url;
 
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
           <div
-            {...longPressEvents}
-            className="flex items-center p-3 -m-3 rounded-lg hover:bg-muted cursor-pointer transition-colors"
-            role="button"
-            tabIndex={0}
+            {...(hasLink ? longPressEvents : {})}
+            className={`flex items-center p-3 -m-3 rounded-lg ${hasLink ? 'hover:bg-muted cursor-pointer' : 'opacity-50'} transition-colors`}
+            role={hasLink ? "button" : "presentation"}
+            tabIndex={hasLink ? 0 : -1}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') handleClick();
+              if (hasLink && (e.key === 'Enter' || e.key === ' ')) handleClick();
             }}
           >
             <div className="flex items-center gap-4 flex-1">
-              {link.artwork && (
+              {link.artwork ? (
                 <Image
                   src={link.artwork}
                   alt={`${link.displayName} artwork`}
@@ -53,23 +57,33 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
                   className="h-10 w-10 rounded-md object-cover"
                   unoptimized
                 />
+              ) : (
+                <div className="h-10 w-10 rounded-md bg-muted flex items-center justify-center">
+                    {/* You might want a placeholder icon here */}
+                </div>
               )}
               <div className="flex-1">
-                <p className="font-semibold">{link.displayName}</p>
+                <p className="font-semibold">{link.displayName || 'Not found'}</p>
                 <p className="text-sm text-muted-foreground">{link.provider.name}</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon" className="ml-4 h-8 w-8 text-muted-foreground" aria-label="Open link">
-              <ExternalLink className="h-4 w-4" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={handleCopy} className="h-8 w-8 text-muted-foreground" aria-label="Copy link">
-              <Copy className="h-4 w-4" />
-            </Button>
+            {hasLink && (
+              <>
+                <Button variant="ghost" size="icon" className="ml-4 h-8 w-8 text-muted-foreground" aria-label="Open link">
+                  <ExternalLink className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" onClick={handleCopy} className="h-8 w-8 text-muted-foreground" aria-label="Copy link">
+                  <Copy className="h-4 w-4" />
+                </Button>
+              </>
+            )}
           </div>
         </TooltipTrigger>
-        <TooltipContent>
-          <p>{t('results.long_press_to_copy')}</p>
-        </TooltipContent>
+        {hasLink && (
+            <TooltipContent>
+                <p>{t('results.long_press_to_copy')}</p>
+            </TooltipContent>
+        )}
       </Tooltip>
     </TooltipProvider>
   );

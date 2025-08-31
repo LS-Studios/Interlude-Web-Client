@@ -1,6 +1,6 @@
 'use server';
 
-import type { ConversionResult, Provider } from '@/lib/types';
+import type { ConversionResult, Provider, ApiConversionResult } from '@/lib/types';
 
 const API_BASE_URL = 'https://interlude.api.leshift.de';
 
@@ -63,34 +63,56 @@ export async function convertLink(
 ): Promise<ConversionResult | null> {
   console.log(`--- DEBUG: convertLink (url: ${url}) ---`);
   try {
-    const response = await fetch(`${API_BASE_URL}/convert`, {
-      method: 'POST',
-      headers: getHeaders(),
-      body: JSON.stringify({ url }),
-      cache: 'no-store',
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/convert?link=${encodeURIComponent(url)}`,
+      { headers: getHeaders() }
+    );
+    console.log(`[convertLink] Response Status: ${response.status}`);
 
     const responseBody = await response.text();
-    console.log(`[convertLink] Response Status: ${response.status}`);
     console.log(`[convertLink] Response Body: ${responseBody}`);
 
     if (!response.ok) {
-      throw new Error(
-        `API Error: ${response.status} - ${responseBody || 'No error message'}`
-      );
+      let errorMessage = responseBody;
+      try {
+        const errorJson = JSON.parse(responseBody);
+        errorMessage = errorJson.message || responseBody;
+      } catch (e) {
+        // Not a JSON response, use the text as is.
+      }
+      throw new Error(errorMessage || 'Failed to convert link');
     }
-    
-    const result: ConversionResult = JSON.parse(responseBody);
-    console.log('[convertLink] Parsed Result:', JSON.stringify(result, null, 2));
 
+    const apiResult: ApiConversionResult = JSON.parse(responseBody);
+    console.log(
+      '[convertLink] Parsed API Result:',
+      JSON.stringify(apiResult, null, 2)
+    );
+
+    const result: ConversionResult = {
+        source_url: url,
+        links: apiResult.results.map(link => ({
+            ...link,
+            // The API returns provider as a string, but our components expect a Provider object.
+            // This is a temporary patch. Ideally we'd fetch all providers and find the matching one.
+            provider: {
+                name: link.provider,
+                url: '',
+                logoUrl: '',
+                iconUrl: ''
+            }
+        }))
+    };
+    
+    console.log(
+      '[convertLink] Mapped to ConversionResult:',
+      JSON.stringify(result, null, 2)
+    );
     console.log('--- END DEBUG: convertLink ---');
     return result;
-
   } catch (error) {
     console.error('[convertLink] Catched Error:', error);
-    if (error instanceof Error) {
-        throw error;
-    }
-    throw new Error('An unknown error occurred during link conversion.');
+    console.log('--- END DEBUG: convertLink (with error) ---');
+    throw error;
   }
 }
