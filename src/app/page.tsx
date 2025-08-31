@@ -14,6 +14,7 @@ export default function Home() {
           width={64} 
           height={64}
           priority
+          className="rounded-lg"
         />
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
           Convert Your Music Links
