@@ -1,13 +1,18 @@
 export interface Provider {
   name: string;
+  url: string;
   logoUrl: string;
   iconUrl: string;
-  url: string;
 }
+
+export type ConvertedLinkType = 'song' | 'artist' | 'album';
 
 export interface ConvertedLink {
   provider: Provider;
+  type: ConvertedLinkType;
+  displayName: string;
   url: string;
+  artwork: string;
 }
 
 export interface ConversionResult {

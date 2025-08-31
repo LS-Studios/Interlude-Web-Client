@@ -44,18 +44,19 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
             }}
           >
             <div className="flex items-center gap-4 flex-1">
-              {link.provider.logoUrl && (
+              {link.artwork && (
                 <Image
-                  src={link.provider.logoUrl}
-                  alt={`${link.provider.name} logo`}
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 object-contain"
+                  src={link.artwork}
+                  alt={`${link.displayName} artwork`}
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-md object-cover"
                   unoptimized
                 />
               )}
               <div className="flex-1">
-                <p className="font-semibold">{link.provider.name}</p>
+                <p className="font-semibold">{link.displayName}</p>
+                <p className="text-sm text-muted-foreground">{link.provider.name}</p>
               </div>
             </div>
             <Button variant="ghost" size="icon" className="ml-4 h-8 w-8 text-muted-foreground" aria-label="Open link">
