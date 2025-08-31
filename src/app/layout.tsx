@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { LanguageProvider } from '@/components/language-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { Header } from '@/components/header';
+import { BottomNavBar } from '@/components/bottom-nav-bar';
 
 export const metadata: Metadata = {
   title: 'Interlude',
@@ -27,11 +28,12 @@ export default function RootLayout({
           <LanguageProvider>
             <div className="relative flex min-h-screen flex-col">
               <Header />
-              <main className="flex flex-1 justify-center py-8">
+              <main className="flex flex-1 justify-center py-8 pb-24 md:pb-8">
                 <div className="container">
                     {children}
                 </div>
               </main>
+              <BottomNavBar />
             </div>
             <Toaster />
           </LanguageProvider>
