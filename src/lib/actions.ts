@@ -23,7 +23,8 @@ export async function getProviders(): Promise<Provider[]> {
     }
     const providers: Provider[] = await response.json();
     return providers.map(provider => ({
-      ...provider
+      ...provider,
+      url: provider.url || '#'
     }));
   } catch (error) {
     console.error('Error fetching providers:', error);
@@ -35,8 +36,14 @@ export async function convertLink(url: string): Promise<ConversionResult> {
   try {
     const response = await fetch(`${API_BASE_URL}/convert?url=${encodeURIComponent(url)}`, { headers: getHeaders() });
     if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to convert link');
+        try {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to convert link');
+        } catch (jsonError) {
+            // If the error response is not JSON, use the text body
+            const textError = await response.text();
+            throw new Error(textError || 'Failed to convert link');
+        }
     }
     const result: ConversionResult = await response.json();
     
