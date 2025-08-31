@@ -32,14 +32,14 @@ export function ProvidersGrid() {
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {providers.map(provider => (
           <a key={provider.name} href={provider.url} target="_blank" rel="noopener noreferrer">
-            <Card className="flex flex-col items-center justify-center p-4 text-center aspect-square transition-all hover:bg-muted">
-              <CardContent className="p-0 flex-grow flex items-center justify-center">
+            <Card className="flex items-center justify-center p-4 aspect-square transition-all hover:bg-muted">
+              <CardContent className="p-0">
                 <Image
                   src={provider.logoUrl}
                   alt={`${provider.name} logo`}
                   width={128}
                   height={128}
-                  className="h-32 w-32 object-contain dark:grayscale dark:brightness-0 dark:invert"
+                  className="h-24 w-24 object-contain dark:grayscale dark:brightness-0 dark:invert"
                   unoptimized
                 />
               </CardContent>
