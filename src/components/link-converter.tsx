@@ -14,7 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useHistory } from '@/hooks/use-history';
 import { useLanguage } from '@/components/language-provider';
 import { convertLink } from '@/lib/actions';
-import type { ConversionResult as ConversionResultType } from '@/lib/types';
+import type { ConversionResult as ConversionResultType, HistoryItem } from '@/lib/types';
 import { ConversionResults } from '@/components/conversion-results';
 
 const FormSchema = z.object({
@@ -25,7 +25,7 @@ type FormValues = z.infer<typeof FormSchema>;
 
 export function LinkConverter() {
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState<ConversionResultType | null>(null);
+  const [result, setResult] = useState<HistoryItem | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const { toast } = useToast();
