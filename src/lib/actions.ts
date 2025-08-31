@@ -9,14 +9,15 @@ const getHeaders = () => {
     'Content-Type': 'application/json',
   };
   if (process.env.INTERLUDE_API_TOKEN) {
-    headers['Authorization'] = `Bearer ${process.env.INTERLUDE_API_TOKEN}`;
+    const encodedToken = Buffer.from(process.env.INTERLUDE_API_TOKEN).toString('base64');
+    headers['Authorization'] = `Bearer ${encodedToken}`;
   }
   return headers;
 }
 
 export async function getProviders(): Promise<Provider[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/providers`, { headers: getHeaders() });
+    const response = await fetch(`${API_BASE_URL}/providers`, { headers: getHeaders(), cache: 'no-store' });
     if (!response.ok) {
       throw new Error('Failed to fetch providers');
     }
