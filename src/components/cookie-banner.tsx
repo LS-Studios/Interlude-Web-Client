@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useLanguage } from './language-provider';
-import Link from 'next/link';
 
 const COOKIE_CONSENT_KEY = 'cookie_consent';
 
@@ -34,9 +33,9 @@ export function CookieBanner() {
       <Card className="container mx-auto flex flex-col items-center justify-between gap-4 p-4 shadow-2xl md:flex-row">
         <p className="text-sm text-muted-foreground">
           {t('cookie_banner.text_start')}{' '}
-          <Link href="/privacy" className="underline hover:text-primary">
+          <a href="https://leshift.de/datenschutz" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
             {t('cookie_banner.privacy_policy')}
-          </Link>
+          </a>
           {t('cookie_banner.text_end')}
         </p>
         <Button onClick={handleAccept} className="w-full flex-shrink-0 md:w-auto">
