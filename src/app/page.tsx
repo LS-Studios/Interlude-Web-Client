@@ -3,8 +3,12 @@ import Image from 'next/image';
 import { LinkConverter } from '@/components/link-converter';
 import { ProvidersGrid } from '@/components/providers-grid';
 import { Skeleton } from '@/components/ui/skeleton';
+import { translations } from '@/lib/i18n';
 
 export default function Home() {
+  const title = translations.en['home.title'];
+  const description = translations.en['home.description'];
+
   return (
     <div className="flex flex-col items-center justify-center gap-8">
       <div className="text-center mt-8 sm:mt-16 flex flex-col items-center gap-6">
@@ -17,10 +21,10 @@ export default function Home() {
           className="rounded-lg"
         />
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">
-          Convert Your Music Links
+          {title}
         </h1>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-          Paste a link from any supported service to convert it to others. Simple, fast, and free.
+          {description}
         </p>
       </div>
       

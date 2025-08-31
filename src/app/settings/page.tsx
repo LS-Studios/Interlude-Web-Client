@@ -89,8 +89,8 @@ export default function SettingsPage() {
                 <AlertDialogDescription>{t('settings.clear_history.confirm')}</AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleClearHistory}>Continue</AlertDialogAction>
+                <AlertDialogCancel>{t('dialog.cancel')}</AlertDialogCancel>
+                <AlertDialogAction onClick={handleClearHistory}>{t('dialog.continue')}</AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
