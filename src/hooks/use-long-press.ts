@@ -11,6 +11,11 @@ export const useLongPress = (
 
   const start = useCallback(
     (event: React.TouchEvent | React.MouseEvent) => {
+      // Prevent long press on right-click
+      if (event.nativeEvent instanceof MouseEvent && event.nativeEvent.button !== 0) {
+        return;
+      }
+
       if (shouldPreventDefault && event.target) {
         event.target.addEventListener('touchend', preventDefault, { passive: false });
         target.current = event.target;
@@ -26,8 +31,19 @@ export const useLongPress = (
   const clear = useCallback(
     (event: React.TouchEvent | React.MouseEvent, shouldTriggerClick = true) => {
       timeout.current && clearTimeout(timeout.current);
-      shouldTriggerClick && !longPressTriggered && onClick();
+      
+      // Check if the click should be triggered.
+      // It should only be triggered if there was no long press and the click is enabled.
+      if (shouldTriggerClick && !longPressTriggered) {
+          // Check if the click target is the share button or its icon, if so, don't trigger the main onClick
+          const clickTarget = event.target as HTMLElement;
+          if (!clickTarget.closest('button[aria-label="Share link"]')) {
+              onClick();
+          }
+      }
+      
       setLongPressTriggered(false);
+      
       if (shouldPreventDefault && target.current) {
         target.current.removeEventListener('touchend', preventDefault);
       }

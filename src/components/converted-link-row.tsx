@@ -26,7 +26,7 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
   };
 
   const handleShare = async (event: React.MouseEvent) => {
-    event.stopPropagation(); // prevent the row's click handler from firing
+    event.stopPropagation(); 
 
     if (navigator.share) {
       try {
@@ -36,12 +36,9 @@ export function ConvertedLinkRow({ link }: ConvertedLinkRowProps) {
           url: link.url,
         });
       } catch (error) {
-        // User cancelled the share dialog, or an error occurred.
-        // We can silently ignore this, as it's usually user action.
         console.info('Share action was cancelled or failed', error);
       }
     } else {
-      // Fallback for browsers that don't support the Web Share API
       handleCopy();
     }
   };
