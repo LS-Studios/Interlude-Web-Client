@@ -29,9 +29,9 @@ export function ProvidersGrid() {
   return (
     <section className="w-full py-12">
       <h2 className="text-2xl font-bold tracking-tight mb-6 text-center">{title}</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div className="flex flex-wrap justify-center gap-4">
         {providers.map(provider => (
-          <a key={provider.name} href={provider.url} target="_blank" rel="noopener noreferrer">
+          <a key={provider.name} href={provider.url} target="_blank" rel="noopener noreferrer" className="w-40">
             <Card className="flex items-center justify-center p-4 aspect-square transition-all hover:bg-muted">
               <CardContent className="p-0">
                 <Image
