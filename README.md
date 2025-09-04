@@ -28,11 +28,9 @@ Paste a link to a song or album (from Spotify, Apple Music, YouTube, etc.), and 
 
 ## 🖼️ Screenshots
 <!-- Replace with actual paths to your screenshots -->
-<p align="center">
-  <img src="screenshots/Screenshot-Converter.png" width="250"/>
-  <img src="screenshots/Screenshot-History.png" width="250"/>
-  <img src="screenshots/Screenshot-Converted.png" width="250"/>
-</p>
+<img src="screenshots/Screenshot-Converter.png" width="250"/>
+<img src="screenshots/Screenshot-History.png" width="250"/>
+<img src="screenshots/Screenshot-Converted.png" width="250"/>
 
 ---
 
