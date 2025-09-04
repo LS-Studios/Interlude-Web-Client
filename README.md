@@ -33,9 +33,9 @@ Paste a link to a song or album (from Spotify, Apple Music, YouTube, etc.), and 
 ---
 
 ## 🌐 Links
-- [🌍 Official Website]([https://interlude.leshift.de/])  
-- [🌍 Android and iOS Code]([https://github.com/LS-Studios/Interlude-Mobile-Client)
-- [📖 Backend Code]([https://github.com/antoniomikley/interlude_server])
+- [🌍 Official Website](https://interlude.leshift.de/)  
+- [🌍 Android and iOS Code](https://github.com/LS-Studios/Interlude-Mobile-Client)
+- [📖 Backend Code](https://github.com/antoniomikley/interlude_server)
 
 ---
 
