@@ -33,7 +33,7 @@ export function CookieBanner() {
       <Card className="container mx-auto flex flex-col items-center justify-between gap-4 p-4 shadow-2xl md:flex-row">
         <p className="text-sm text-muted-foreground">
           {t('cookie_banner.text_start')}{' '}
-          <a href="https://leshift.de/datenschutz" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
+          <a href="https://leshift.de/interlude/datenschutz" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
             {t('cookie_banner.privacy_policy')}
           </a>
           {t('cookie_banner.text_end')}

@@ -15,7 +15,7 @@ export function Footer() {
               <a href="https://leshift.de/impressum" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
                 {t('footer.imprint')}
               </a>
-              <a href="https://leshift.de/datenschutz" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+              <a href="https://leshift.de/interlude/datenschutz" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
                 {t('footer.privacy')}
               </a>
             </div>
