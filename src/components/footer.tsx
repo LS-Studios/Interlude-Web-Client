@@ -12,7 +12,7 @@ export function Footer() {
         <div className="w-full flex flex-col items-center justify-center gap-2 text-center text-sm text-muted-foreground sm:flex-row sm:justify-between">
             <p>&copy; {new Date().getFullYear()} Interlude. {t('footer.rights_reserved')}</p>
             <div className="flex items-center gap-4">
-              <a href="https://leshift.de/impressum" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
+              <a href="https://leshift.de/interlude/impressum" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
                 {t('footer.imprint')}
               </a>
               <a href="https://leshift.de/interlude/datenschutz" target="_blank" rel="noopener noreferrer" className="hover:text-primary">
